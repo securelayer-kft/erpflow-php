@@ -32,5 +32,11 @@
     }
   },
   "minimum-stability": "stable",
-  "prefer-stable": true
+  "prefer-stable": true,
+  "scripts": {
+    "test": [
+      "@php tests/smoke.php",
+      "@php tests/contract.php"
+    ]
+  }
 }

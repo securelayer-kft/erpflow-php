@@ -15,8 +15,11 @@ final class DocumentsApi extends AbstractApi
         $h=$idempotencyKey!==null?['Idempotency-Key'=>$idempotencyKey]:[];
         return (array)$this->data('POST','/documents',[],$body,$h);
     }
+    public function createDocument(array $body,?string $idempotencyKey=null): array { return $this->create($body,$idempotencyKey); }
     /** Converts an existing draft into an issued document. */
+    public function update(int $id,array $body): array { return $this->convertDraft($id,$body); }
     public function convertDraft(int $id,array $body): array { return (array)$this->data('PUT','/documents/'.$id,[],$body); }
+    public function delete(int $id): void { $this->deleteDraft($id); }
     public function deleteDraft(int $id): void { $this->response('DELETE','/documents/'.$id); }
 
     public function publicUrl(int $id): array { return (array)$this->data('GET','/documents/'.$id.'/public-url'); }
@@ -28,6 +31,7 @@ final class DocumentsApi extends AbstractApi
     public function archive(int $id): void { $this->response('PUT','/documents/'.$id.'/archive'); }
     public function copy(int $id): array { return (array)$this->data('POST','/documents/'.$id.'/copy',[],[]); }
     public function createFromProforma(int $id,array $body=[]): array { return (array)$this->data('POST','/documents/'.$id.'/create-from-proforma',[],$body); }
+    public function createModificationDocument(int $id,array $body): array { return $this->createModification($id,$body); }
     public function createModification(int $id,array $body): array { return (array)$this->data('POST','/documents/'.$id.'/create-modification-document',[],$body); }
     public function cancel(int $id,array $body=[]): array { return (array)$this->data('POST','/documents/'.$id.'/cancel',[],$body); }
 

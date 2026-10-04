@@ -52,7 +52,7 @@ final class Client
             'Accept' => $binary
                 ? 'application/pdf, text/csv, application/octet-stream'
                 : 'application/json',
-            'User-Agent' => 'ERPFlow-PHP/1.0',
+            'User-Agent' => 'ERPFlow-PHP/1.1',
         ] + $headers;
 
         if ($body !== null) {

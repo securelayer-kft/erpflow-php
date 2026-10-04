@@ -142,3 +142,21 @@ Stable Composer releases are published from Git tags such as `v1.0.0`. The packa
 ## License
 
 MIT. Copyright © 2026 SecureLayer Kft.
+
+
+## API v3 full contract coverage (v1.1.0)
+
+Version 1.1.0 exposes all 52 method+route combinations found in the audited ERPFlow Public API v3 router. `ERPFlow\Contract::ENDPOINTS` contains the canonical inventory and `ERPFlow\Contract` also exposes the contract enums used by integrations.
+
+Coverage includes organization, currency conversion, tax-number and legacy-ID utilities, both server-time routes, document blocks, bank accounts, partners, products, the complete document lifecycle, payments, receipts, spendings and document exports.
+
+### Current server-side contract limitations
+
+The SDK intentionally mirrors the server contract rather than pretending unsupported behavior exists:
+
+- `simple_csv` is currently the executable document-export format even though the API contract recognizes additional export identifiers.
+- `without_financial_fulfillment=true` for modification documents is currently rejected by the server.
+- proforma conversion currently creates an invoice.
+- the currency response preserves the existing `conversation_rate` field spelling for backwards compatibility.
+
+The SDK performs transport and ergonomic wrapping; authoritative business validation remains server-side so new compatible server fields can be passed without waiting for an SDK release.
